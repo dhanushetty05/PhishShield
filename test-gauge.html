@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gauge Test</title>
+    <style>
+        body { background: #0b111e; color: #fff; font-family: Arial; padding: 50px; }
+        button { padding: 15px 30px; margin: 10px; font-size: 16px; cursor: pointer; }
+        .gauge-wrapper { width: 200px; height: 200px; position: relative; margin: 50px auto; }
+        .gauge-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .gauge-track { fill: none; stroke: #1a2332; stroke-width: 12; }
+        .gauge-fill { fill: none; stroke: #22c55e; stroke-width: 12; 
+                      stroke-dasharray: 565.49; stroke-dashoffset: 565.49; 
+                      transition: stroke-dashoffset 1s ease, stroke 0.3s ease; }
+        .gauge-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+        .gauge-score { font-size: 48px; font-weight: bold; }
+        .gauge-level { font-size: 14px; margin-top: 5px; }
+        .green .gauge-fill { stroke: #22c55e; }
+        .yellow .gauge-fill { stroke: #eab308; }
+        .orange .gauge-fill { stroke: #f97316; }
+        .red .gauge-fill { stroke: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>Gauge Test</h1>
+    
+    <div class="gauge-wrapper green" id="gauge-wrapper">
+        <svg class="gauge-svg" viewBox="0 0 200 200">
+            <circle class="gauge-track" cx="100" cy="100" r="90" />
+            <circle class="gauge-fill" id="gauge-fill" cx="100" cy="100" r="90" />
+        </svg>
+        <div class="gauge-center">
+            <div class="gauge-score" id="gauge-score">0</div>
+            <div class="gauge-percent">%</div>
+            <div class="gauge-level" id="gauge-level">SAFE</div>
+        </div>
+    </div>
+    
+    <div style="text-align: center;">
+        <button onclick="testGauge(0, 'SAFE', 'green')">0% Safe</button>
+        <button onclick="testGauge(25, 'SUSPICIOUS', 'yellow')">25% Suspicious</button>
+        <button onclick="testGauge(50, 'MODERATE', 'yellow')">50% Moderate</button>
+        <button onclick="testGauge(75, 'HIGH RISK', 'orange')">75% High Risk</button>
+        <button onclick="testGauge(92, 'CRITICAL FRAUD', 'red')">92% Critical</button>
+    </div>
+    
+    <script>
+        const GAUGE_CIRCUMFERENCE = 565.49;
+        const gaugeFill = document.getElementById('gauge-fill');
+        const gaugeScore = document.getElementById('gauge-score');
+        const gaugeLevel = document.getElementById('gauge-level');
+        const gaugeWrapper = document.getElementById('gauge-wrapper');
+        
+        function testGauge(score, level, color) {
+            console.log(`Testing: ${score}% ${level} ${color}`);
+            
+            const offset = GAUGE_CIRCUMFERENCE - (score / 100) * GAUGE_CIRCUMFERENCE;
+            
+            gaugeFill.style.strokeDashoffset = offset;
+            gaugeScore.textContent = score;
+            gaugeLevel.textContent = level;
+            gaugeWrapper.className = `gauge-wrapper ${color}`;
+            
+            console.log(`Updated: offset=${offset}, score=${score}, level=${level}, color=${color}`);
+        }
+    </script>
+</body>
+</html>

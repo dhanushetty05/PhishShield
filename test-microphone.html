@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microphone Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0b111e;
+            color: #fff;
+        }
+        .status {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background: #1a2332;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background: #3b82f6;
+            color: white;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        .log {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log div {
+            margin: 5px 0;
+        }
+        .success { color: #22c55e; }
+        .error { color: #ef4444; }
+        .info { color: #3b82f6; }
+        .warning { color: #eab308; }
+    </style>
+</head>
+<body>
+    <h1>🎤 Microphone & Audio Test</h1>
+    
+    <div class="status">
+        <h2>Status: <span id="status">Not Started</span></h2>
+        <p id="info">Click "Test Microphone" to begin</p>
+    </div>
+    
+    <div>
+        <button id="btnTest" onclick="testMicrophone()">🎤 Test Microphone</button>
+        <button id="btnStop" onclick="stopTest()" disabled>⏹️ Stop Test</button>
+        <button onclick="clearLog()">🗑️ Clear Log</button>
+    </div>
+    
+    <div class="log" id="log"></div>
+    
+    <script>
+        let mediaRecorder = null;
+        let audioStream = null;
+        let chunkCount = 0;
+        
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = type;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+        
+        function setStatus(text, info = '') {
+            document.getElementById('status').textContent = text;
+            document.getElementById('info').textContent = info;
+        }
+        
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+        
+        async function testMicrophone() {
+            log('🎤 Starting microphone test...', 'info');
+            setStatus('Testing...', 'Requesting microphone access');
+            
+            document.getElementById('btnTest').disabled = true;
+            document.getElementById('btnStop').disabled = false;
+            
+            try {
+                // Request microphone
+                log('📋 Requesting microphone permission...', 'info');
+                audioStream = await navigator.mediaDevices.getUserMedia({
+                    audio: {
+                        channelCount: 1,
+                        sampleRate: 16000,
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                    }
+                });
+                
+                log('✅ Microphone access granted!', 'success');
+                setStatus('Recording', 'Microphone is active');
+                
+                // Get audio tracks info
+                const tracks = audioStream.getAudioTracks();
+                log(`📊 Audio tracks: ${tracks.length}`, 'info');
+                tracks.forEach((track, i) => {
+                    log(`   Track ${i}: ${track.label} (${track.kind})`, 'info');
+                    log(`   Settings: ${JSON.stringify(track.getSettings())}`, 'info');
+                });
+                
+                // Create MediaRecorder
+                const options = { mimeType: 'audio/webm;codecs=opus' };
+                mediaRecorder = new MediaRecorder(audioStream, options);
+                
+                log(`✅ MediaRecorder created (${options.mimeType})`, 'success');
+                
+                chunkCount = 0;
+                
+                // Handle data available
+                mediaRecorder.ondataavailable = (event) => {
+                    if (!event.data || event.data.size === 0) {
+                        log('⚠️ Empty audio chunk received', 'warning');
+                        return;
+                    }
+                    
+                    chunkCount++;
+                    log(`📦 Chunk #${chunkCount}: ${event.data.size} bytes`, 'success');
+                    
+                    // Try to read the blob
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const arrayBuffer = reader.result;
+                        log(`   ✅ Chunk readable: ${arrayBuffer.byteLength} bytes`, 'info');
+                    };
+                    reader.onerror = () => {
+                        log(`   ❌ Failed to read chunk`, 'error');
+                    };
+                    reader.readAsArrayBuffer(event.data);
+                };
+                
+                mediaRecorder.onerror = (event) => {
+                    log(`❌ MediaRecorder error: ${event.error}`, 'error');
+                };
+                
+                mediaRecorder.onstop = () => {
+                    log('⏹️ MediaRecorder stopped', 'info');
+                };
+                
+                // Start recording with 3-second chunks
+                mediaRecorder.start(3000);
+                log('🚀 Recording started (3-second chunks)', 'success');
+                log('🗣️ SPEAK NOW into your microphone!', 'warning');
+                
+            } catch (err) {
+                log(`❌ Error: ${err.message}`, 'error');
+                setStatus('Failed', err.message);
+                document.getElementById('btnTest').disabled = false;
+                document.getElementById('btnStop').disabled = true;
+            }
+        }
+        
+        function stopTest() {
+            log('⏹️ Stopping test...', 'info');
+            
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            
+            if (audioStream) {
+                audioStream.getTracks().forEach(track => {
+                    track.stop();
+                    log(`   Stopped track: ${track.label}`, 'info');
+                });
+            }
+            
+            log(`✅ Test complete: ${chunkCount} chunks captured`, 'success');
+            setStatus('Stopped', `Captured ${chunkCount} audio chunks`);
+            
+            document.getElementById('btnTest').disabled = false;
+            document.getElementById('btnStop').disabled = true;
+        }
+        
+        // Check browser support
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!window.MediaRecorder) {
+                log('❌ MediaRecorder not supported in this browser', 'error');
+                setStatus('Not Supported', 'Use Chrome or Firefox');
+                document.getElementById('btnTest').disabled = true;
+            } else {
+                log('✅ MediaRecorder supported', 'success');
+            }
+            
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                log('❌ getUserMedia not supported', 'error');
+                setStatus('Not Supported', 'Microphone API unavailable');
+                document.getElementById('btnTest').disabled = true;
+            } else {
+                log('✅ getUserMedia supported', 'success');
+            }
+        });
+    </script>
+</body>
+</html>

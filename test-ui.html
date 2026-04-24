@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishShield UI Test</title>
+  <link rel="stylesheet" href="frontend/style.css?v=3.0">
+  <style>
+    .test-container {
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .test-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin: 20px 0;
+      backdrop-filter: blur(30px);
+      box-shadow: var(--shadow-premium);
+    }
+    .color-swatch {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      border-radius: 12px;
+      border: 2px solid white;
+      box-shadow: 0 0 20px currentColor;
+    }
+    .test-button {
+      padding: 16px 32px;
+      margin: 10px;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1 style="text-align: center; color: var(--accent-cyan); font-size: 3rem; text-shadow: 0 0 20px var(--accent-cyan);">
+      🛡️ PhishShield UI v3.0 Test
+    </h1>
+    
+    <div class="test-card">
+      <h2 style="color: var(--accent-blue-bright);">Color Palette Test</h2>
+      <p style="color: var(--text-secondary);">If you see BRIGHT NEON colors below, the new CSS is working!</p>
+      
+      <div style="margin: 20px 0;">
+        <div class="color-swatch" style="background: var(--accent-cyan);" title="Cyan"></div>
+        <div class="color-swatch" style="background: var(--accent-blue);" title="Blue"></div>
+        <div class="color-swatch" style="background: var(--accent-purple);" title="Purple"></div>
+        <div class="color-swatch" style="background: var(--safe);" title="Safe Green"></div>
+        <div class="color-swatch" style="background: var(--crit);" title="Critical Pink"></div>
+      </div>
+      
+      <p style="color: var(--text-primary); font-weight: 600;">
+        Expected colors:
+      </p>
+      <ul style="color: var(--text-secondary);">
+        <li>Cyan: #00c8ff (bright electric blue)</li>
+        <li>Blue: #00c8ff (same as cyan)</li>
+        <li>Purple: #b000ff (electric purple)</li>
+        <li>Safe: #00ff88 (neon green)</li>
+        <li>Critical: #ff0055 (hot pink)</li>
+      </ul>
+    </div>
+
+    <div class="test-card">
+      <h2 style="color: var(--accent-blue-bright);">Button Test</h2>
+      <p style="color: var(--text-secondary);">Buttons should have HUGE glowing shadows and lift dramatically on hover</p>
+      
+      <button class="test-button btn-start">🎙️ Start (Neon Green)</button>
+      <button class="test-button btn-stop">⏹️ Stop (Hot Pink)</button>
+      <button class="test-button btn-demo">🎬 Demo (Electric Purple)</button>
+    </div>
+
+    <div class="test-card">
+      <h2 style="color: var(--accent-blue-bright);">Background Test</h2>
+      <p style="color: var(--text-secondary);">Check these visual elements:</p>
+      <ul style="color: var(--text-secondary); line-height: 2;">
+        <li>✅ Background should be PURE BLACK (#000000)</li>
+        <li>✅ You should see a MOVING GRID of cyan lines</li>
+        <li>✅ Grid should be PULSING (fading in/out)</li>
+        <li>✅ You should see GLOWING AREAS (radial gradients)</li>
+        <li>✅ This card should have a THICK CYAN BORDER (2px)</li>
+        <li>✅ Hover over this card - it should LIFT UP and GLOW</li>
+      </ul>
+    </div>
+
+    <div class="test-card">
+      <h2 style="color: var(--accent-blue-bright);">Troubleshooting</h2>
+      <div style="color: var(--text-secondary); line-height: 1.8;">
+        <p><strong style="color: var(--text-primary);">If colors look MUTED (dark blue instead of cyan):</strong></p>
+        <ol>
+          <li>Press <code style="background: rgba(0,200,255,0.2); padding: 2px 8px; border-radius: 4px;">Ctrl + Shift + R</code> (Windows) or <code style="background: rgba(0,200,255,0.2); padding: 2px 8px; border-radius: 4px;">Cmd + Shift + R</code> (Mac)</li>
+          <li>Open DevTools (F12) → Network tab → Check "Disable cache"</li>
+          <li>Close and reopen browser</li>
+          <li>Check that style.css file was actually saved with new colors</li>
+        </ol>
+        
+        <p style="margin-top: 20px;"><strong style="color: var(--text-primary);">Quick CSS check:</strong></p>
+        <p>Open <code style="background: rgba(0,200,255,0.2); padding: 2px 8px; border-radius: 4px;">frontend/style.css</code> and look at line 13-14:</p>
+        <pre style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; border: 1px solid var(--border); overflow-x: auto;">--accent-blue:   #00c8ff;
+--accent-blue-bright: #00e5ff;</pre>
+        <p>If you see <code style="background: rgba(255,0,85,0.2); padding: 2px 8px; border-radius: 4px; color: var(--crit);">#3b82f6</code> instead, the file wasn't updated!</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0; padding: 30px; background: linear-gradient(135deg, rgba(0,200,255,0.1), rgba(176,0,255,0.1)); border-radius: 20px; border: 2px solid var(--border);">
+      <h2 style="color: var(--accent-cyan); font-size: 2rem; margin-bottom: 10px;">
+        ✨ If you can see this glowing text, v3.0 is working! ✨
+      </h2>
+      <p style="color: var(--text-secondary); font-size: 1.1rem;">
+        Now open <code style="background: rgba(0,200,255,0.2); padding: 4px 12px; border-radius: 6px;">frontend/dashboard.html</code> to see the full experience!
+      </p>
+    </div>
+  </div>
+</body>
+</html>

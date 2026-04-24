@@ -1,0 +1,274 @@
+phrase,risk_weight,category
+share your otp,1.0,OTP Fraud
+cvv number,0.98,Banking Fraud
+share your pin,0.98,Credential Theft
+tell me your password,0.98,Credential Theft
+aadhaar otp,0.95,Identity Fraud
+arrest warrant,0.95,Threat Language
+arrested tomorrow,0.95,Threat Language
+atm pin,0.95,Credential Theft
+confirm your otp,0.95,OTP Fraud
+cvv,0.95,Banking Fraud
+do not go to police,0.95,Secrecy Demand
+enter the otp,0.95,OTP Fraud
+non bailable warrant,0.95,Threat Language
+one time password,0.95,OTP Fraud
+otp,0.95,OTP Fraud
+rbi calling,0.95,Government Impersonation
+upi pin,0.95,UPI Fraud
+you will be arrested,0.95,Threat Language
+case filed against you,0.92,Threat Language
+cbi calling,0.92,Government Impersonation
+congratulations you won,0.92,Lottery Scam
+do not contact bank,0.92,Secrecy Demand
+do not inform your family,0.92,Secrecy Demand
+i can see your screen,0.92,Remote Access Scam
+lottery winner,0.92,Lottery Scam
+rbi headquarters,0.92,Government Impersonation
+rbi officer,0.92,Government Impersonation
+screen visible to me,0.92,Remote Access Scam
+transfer to safe account,0.92,Money Transfer Fraud
+warrant issued,0.92,Threat Language
+your address is under surveillance,0.92,Threat Language
+your name in fir,0.92,Threat Language
+your number used in fraud,0.92,Telecom Fraud
+aadhaar blocked,0.9,Identity Fraud
+account blocked,0.9,Banking Fraud
+account frozen,0.9,Banking Fraud
+account will be blocked,0.9,Banking Fraud
+anydesk,0.9,Remote Access Scam
+bail amount,0.9,Money Transfer Fraud
+card number,0.9,Banking Fraud
+cbi officer,0.9,Government Impersonation
+credit card details,0.9,Banking Fraud
+criminal charges,0.9,Threat Language
+do not discuss with anyone,0.9,Secrecy Demand
+do not tell your husband,0.9,Secrecy Demand
+do not tell your wife,0.9,Secrecy Demand
+double your money,0.9,Investment Fraud
+fir filed,0.9,Threat Language
+fir registered,0.9,Threat Language
+income tax officer,0.9,Government Impersonation
+jackpot winner,0.9,Lottery Scam
+keep this call confidential,0.9,Secrecy Demand
+lookout notice,0.9,Threat Language
+mpin,0.9,Credential Theft
+number linked to crime,0.9,Telecom Fraud
+otp received,0.9,OTP Fraud
+police will come,0.9,Threat Language
+safe account,0.9,Money Transfer Fraud
+social security,0.9,Data Theft
+you have won,0.9,Lottery Scam
+your number will be blocked,0.9,Government Impersonation
+300 percent return,0.88,Investment Fraud
+account suspended,0.88,Banking Fraud
+account will be closed,0.88,Banking Fraud
+card verification,0.88,Banking Fraud
+central bureau,0.88,Government Impersonation
+claim your prize,0.88,Lottery Scam
+complete your kyc,0.88,Banking Fraud
+crore prize,0.88,Lottery Scam
+do not tell anyone,0.88,Secrecy Demand
+ed officer,0.88,Government Impersonation
+government account,0.88,Money Transfer Fraud
+high court notice,0.88,Government Impersonation
+income tax notice,0.88,Government Impersonation
+install the apk,0.88,Remote Access Scam
+ipin,0.88,Credential Theft
+kaun banega crorepati,0.88,Lottery Scam
+kbc winner,0.88,Lottery Scam
+keep it secret,0.88,Secrecy Demand
+kyc expired,0.88,Banking Fraud
+login password,0.88,Credential Theft
+mobile number blocked,0.88,Telecom Fraud
+mobile number disconnected,0.88,Government Impersonation
+money laundering,0.88,Threat Language
+narcotics bureau,0.88,Government Impersonation
+pin number,0.88,Credential Theft
+rbi notification,0.88,Government Impersonation
+reserve bank of india,0.88,Government Impersonation
+secret code,0.88,Credential Theft
+send money,0.88,Money Transfer Fraud
+send to this account,0.88,Money Transfer Fraud
+sim blocked,0.88,Government Impersonation
+sim card blocked,0.88,Government Impersonation
+sim card will be cancelled,0.88,Telecom Fraud
+transaction password,0.88,Credential Theft
+transfer money,0.88,Money Transfer Fraud
+your call is being monitored,0.88,Threat Language
+your phone will be disconnected,0.88,Telecom Fraud
+aadhaar number,0.85,Identity Fraud
+aadhaar verification,0.85,Identity Fraud
+authentication code,0.85,Credential Theft
+bank account number,0.85,Banking Fraud
+bumper prize,0.85,Lottery Scam
+card expiry,0.85,Banking Fraud
+cocaine,0.85,Threat Language
+court order,0.85,Government Impersonation
+cyber crime branch,0.85,Government Impersonation
+cybercrime police,0.85,Government Impersonation
+drug trafficking,0.85,Threat Language
+enforcement directorate,0.85,Government Impersonation
+flipkart winner,0.85,Lottery Scam
+interpol,0.85,Government Impersonation
+kyc update,0.85,Banking Fraud
+kyc verification,0.85,Banking Fraud
+lucky winner,0.85,Lottery Scam
+narcotic,0.85,Threat Language
+number deactivated,0.85,Telecom Fraud
+number will be blocked,0.85,Telecom Fraud
+otp expired,0.85,OTP Fraud
+otp has been sent,0.85,OTP Fraud
+prize money,0.85,Lottery Scam
+security code,0.85,Credential Theft
+sideload,0.85,Remote Access Scam
+supreme court,0.85,Government Impersonation
+tax evasion,0.85,Government Impersonation
+teamviewer,0.85,Remote Access Scam
+transfer amount,0.85,Money Transfer Fraud
+ultraviewer,0.85,Remote Access Scam
+update your kyc,0.85,Banking Fraud
+aadhaar linked,0.82,Identity Fraud
+approve the request,0.82,UPI Fraud
+click on the link,0.82,Remote Access Scam
+cyber cell,0.82,Government Impersonation
+fifty lakh,0.82,Lottery Scam
+guaranteed returns,0.82,Investment Fraud
+illegal activity,0.82,Threat Language
+jio prize,0.82,Lottery Scam
+legal action,0.82,Threat Language
+lucky draw,0.82,Lottery Scam
+ministry of finance,0.82,Government Impersonation
+no risk investment,0.82,Investment Fraud
+pan verification,0.82,Identity Fraud
+passcode,0.82,Credential Theft
+pending kyc,0.82,Banking Fraud
+remote access,0.82,Remote Access Scam
+scan this qr code,0.82,UPI Fraud
+six digit code,0.82,OTP Fraud
+this is confidential,0.82,Secrecy Demand
+trai regulation,0.82,Telecom Fraud
+within 30 minutes,0.82,Urgency Tactic
+aadhaar card,0.8,Identity Fraud
+airdroid,0.8,Remote Access Scam
+amazon gift card,0.8,Lottery Scam
+collect request,0.8,UPI Fraud
+debit card,0.8,Banking Fraud
+dnd violation,0.8,Telecom Fraud
+download this software,0.8,Remote Access Scam
+final warning,0.8,Urgency Tactic
+fine amount,0.8,Money Transfer Fraud
+follow the link,0.8,Remote Access Scam
+four digit code,0.8,OTP Fraud
+ifsc code,0.8,Banking Fraud
+income tax department,0.8,Government Impersonation
+install this app,0.8,Remote Access Scam
+it department,0.8,Government Impersonation
+pan number,0.8,Identity Fraud
+passport number,0.8,Data Theft
+password,0.8,Credential Theft
+pay now,0.8,Money Transfer Fraud
+processing fee,0.8,Money Transfer Fraud
+quick support,0.8,Remote Access Scam
+rbi,0.8,Government Impersonation
+re-kyc,0.8,Banking Fraud
+registration fee,0.8,Money Transfer Fraud
+release fee,0.8,Money Transfer Fraud
+telecom authority,0.8,Telecom Fraud
+telegram group earning,0.8,Investment Fraud
+trai,0.8,Government Impersonation
+verification code,0.8,OTP Fraud
+within 2 hours,0.8,Urgency Tactic
+you are selected,0.8,Lottery Scam
+zero risk,0.8,Investment Fraud
+advance payment,0.78,Money Transfer Fraud
+challan fee,0.78,Money Transfer Fraud
+clearance fee,0.78,Money Transfer Fraud
+like and earn,0.78,Investment Fraud
+payment required,0.78,Money Transfer Fraud
+scan the qr,0.78,UPI Fraud
+screen sharing,0.78,Remote Access Scam
+security deposit,0.78,Money Transfer Fraud
+tax refund,0.78,Government Impersonation
+tds refund,0.78,Government Impersonation
+telecom regulatory,0.78,Government Impersonation
+ten lakh,0.78,Lottery Scam
+within an hour,0.78,Urgency Tactic
+aadhaar,0.75,Identity Fraud
+account number,0.75,Banking Fraud
+allow access,0.75,Remote Access Scam
+before it is too late,0.75,Urgency Tactic
+between us,0.75,Secrecy Demand
+customs duty,0.75,Money Transfer Fraud
+deadline today,0.75,Urgency Tactic
+do not share otp,0.75,OTP Fraud
+grant permission,0.75,Remote Access Scam
+income tax,0.75,Government Impersonation
+insurance amount,0.75,Money Transfer Fraud
+internet banking,0.75,Banking Fraud
+net banking,0.75,Banking Fraud
+refund process,0.75,Banking Fraud
+task based earning,0.75,Investment Fraud
+token amount,0.75,Money Transfer Fraud
+upi id,0.75,UPI Fraud
+visit this website,0.75,Remote Access Scam
+within 24 hours,0.75,Urgency Tactic
+act now,0.72,Urgency Tactic
+confirm your details,0.72,Data Theft
+critical alert,0.72,Urgency Tactic
+crypto investment,0.72,Investment Fraud
+earn daily,0.72,Investment Fraud
+enter the code,0.72,OTP Fraud
+expire today,0.72,Urgency Tactic
+fingerprint verification,0.72,Identity Fraud
+forex trading,0.72,Investment Fraud
+form 16,0.72,Data Theft
+high returns,0.72,Investment Fraud
+last chance,0.72,Urgency Tactic
+pm scheme,0.72,Government Impersonation
+private matter,0.72,Secrecy Demand
+without any delay,0.72,Urgency Tactic
+bhim upi,0.7,UPI Fraud
+biometric,0.7,Identity Fraud
+daily income,0.7,Investment Fraud
+do not delay,0.7,Urgency Tactic
+earn from home,0.7,Investment Fraud
+failed transaction,0.7,Banking Fraud
+free gift,0.7,Lottery Scam
+government scheme,0.7,Government Impersonation
+identity proof,0.7,Data Theft
+immediately,0.7,Urgency Tactic
+investment opportunity,0.7,Investment Fraud
+last opportunity,0.7,Urgency Tactic
+pan card,0.7,Identity Fraud
+refund amount,0.7,Banking Fraud
+residential address,0.7,Data Theft
+salary slip,0.7,Data Theft
+time is running out,0.7,Urgency Tactic
+trading app,0.7,Investment Fraud
+transaction failed,0.7,Banking Fraud
+upi transaction,0.7,UPI Fraud
+verify your identity,0.7,Data Theft
+current address,0.68,Data Theft
+data entry job,0.68,Investment Fraud
+urgent,0.68,Urgency Tactic
+bitcoin,0.65,Investment Fraud
+expires in,0.65,Urgency Tactic
+gift voucher,0.65,Lottery Scam
+limited time,0.65,Urgency Tactic
+mother's name,0.65,Data Theft
+part time job,0.65,Investment Fraud
+photo id,0.65,Data Theft
+reward points,0.65,Lottery Scam
+right now,0.65,Urgency Tactic
+voter id,0.65,Identity Fraud
+work from home,0.65,Investment Fraud
+cashback offer,0.6,Lottery Scam
+date of birth,0.6,Data Theft
+driving licence,0.6,Identity Fraud
+emergency,0.6,Urgency Tactic
+google pay,0.6,UPI Fraud
+minimum balance,0.6,Banking Fraud
+paytm,0.6,UPI Fraud
+phonepe,0.6,UPI Fraud
+email address,0.55,Data Theft

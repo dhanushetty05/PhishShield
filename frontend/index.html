@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhishShield — Live AI Fraud Call Detection</title>
+  <meta name="description" content="Real-time AI-powered fraud and scam call detection. Protect yourself from phone scams instantly." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body>
+
+  <!-- Background effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-radial"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-logo">
+      <div class="shield-icon">🛡</div>
+      PhishShield
+    </div>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#datasets">Datasets</a></li>
+      <li><a href="dashboard.html">Dashboard →</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      AI-Powered · 100% On-Device · Zero Cloud
+    </div>
+
+    <h1 class="hero-title">
+      Detect Fraud Calls<br />
+      <span class="gradient-text">In Real‑Time</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      PhishShield listens to your live call, analyzes voice patterns and speech content
+      using local AI, and alerts you the moment a scam is detected — no data leaves your device.
+    </p>
+
+    <div class="hero-cta">
+      <a href="dashboard.html" class="btn-primary">
+        🛡️ Start Live Detection
+      </a>
+      <a href="#how-it-works" class="btn-secondary">
+        Learn how it works ↓
+      </a>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-value">200+</div>
+      <div class="stat-label">Scam Phrase Patterns</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">3s</div>
+      <div class="stat-label">Analysis Cycle</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">0</div>
+      <div class="stat-label">Cloud API Calls</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">98+</div>
+      <div class="stat-label">Voice Features Extracted</div>
+    </div>
+  </div>
+
+  <!-- How It Works -->
+  <section class="section" id="how-it-works">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Three layers of fraud detection</h2>
+    <p class="section-subtitle">Every 3 seconds, PhishShield runs your call through a multi-stage AI pipeline.</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">STEP 01</div>
+        <span class="step-icon">🎙️</span>
+        <h3 class="step-title">Live Audio Capture</h3>
+        <p class="step-desc">
+          Your browser's MediaRecorder API silently captures 3-second audio chunks
+          from the call. No recording is stored — chunks are analyzed and discarded
+          immediately. WebRTC ensures low latency.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">STEP 02</div>
+        <span class="step-icon">🧠</span>
+        <h3 class="step-title">Dual AI Analysis</h3>
+        <p class="step-desc">
+          Whisper transcribes speech locally. Librosa extracts 98 voice biomarkers
+          (MFCC, pitch, spectral features). A trained Random Forest + LSTM ensemble
+          predicts if the voice is AI-generated or cloned.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">STEP 03</div>
+        <span class="step-icon">⚠️</span>
+        <h3 class="step-title">Instant Risk Alert</h3>
+        <p class="step-desc">
+          A weighted risk score (40% voice + 60% content) classifies the call as
+          SAFE, SUSPICIOUS, HIGH RISK, or CRITICAL FRAUD, updating your dashboard
+          gauge every 3 seconds with color-coded alerts.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+    <div class="section-label">Capabilities</div>
+    <h2 class="section-title">Built for real-world scam detection</h2>
+    <p class="section-subtitle">Covers Indian fraud patterns and global scam tactics out of the box.</p>
+
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🔊</div>
+        <div class="feature-text">
+          <strong>AI Voice Cloning Detection</strong>
+          <span>Detects synthetic/AI-generated voices via MFCC variance analysis</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🏦</div>
+        <div class="feature-text">
+          <strong>Banking Fraud Patterns</strong>
+          <span>OTP, UPI PIN, CVV, account number, KYC expiry threats</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🇮🇳</div>
+        <div class="feature-text">
+          <strong>Indian Scam Patterns</strong>
+          <span>RBI, Aadhaar, income tax, ED, CBI, TRAI impersonation</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-text">
+          <strong>Urgency Language Detection</strong>
+          <span>Identifies artificial time pressure and fear-based language</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🎭</div>
+        <div class="feature-text">
+          <strong>Authority Impersonation</strong>
+          <span>Detects callers pretending to be banks, courts, or government</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-text">
+          <strong>100% On-Device</strong>
+          <span>Whisper STT runs locally. No cloud APIs. No data ever leaves your device.</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">📊</div>
+        <div class="feature-text">
+          <strong>Real-Time Risk Gauge</strong>
+          <span>Live animated score from 0–100% with color-coded risk levels</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-text">
+          <strong>Remote Access Scam Detection</strong>
+          <span>Flags AnyDesk, TeamViewer, APK install requests</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-text">
+          <strong>Secrecy Demand Detection</strong>
+          <span>"Don't tell your family" — classic scammer isolation tactic</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-text">
+          <strong>Lottery Scam Patterns</strong>
+          <span>"You've won" lottery, gift, prize, lucky draw detection</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🧬</div>
+        <div class="feature-text">
+          <strong>Voice Biomarker Analysis</strong>
+          <span>98-dimensional feature vector: MFCC, pitch, chroma, spectral rolloff</span>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">📱</div>
+        <div class="feature-text">
+          <strong>Works in Browser</strong>
+          <span>Open index.html in Chrome — no install, no server needed for frontend</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Datasets -->
+  <section class="section" id="datasets">
+    <div class="section-label">AI Training Data</div>
+    <h2 class="section-title">Trained on real-world datasets</h2>
+    <p class="section-subtitle">PhishShield's models are trained on industry-standard audio datasets.</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-icon">🔬</span>
+        <h3 class="step-title">ASVspoof 2019</h3>
+        <p class="step-desc">
+          University of Edinburgh dataset containing genuine and AI-spoofed voices.
+          Used to train the voice fraud classifier to detect deepfake audio.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-icon">😤</span>
+        <h3 class="step-title">RAVDESS Emotional Speech</h3>
+        <p class="step-desc">
+          Actors speaking with different emotions. Used to detect artificial urgency,
+          fear, and anger tactics commonly used by scam callers.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-icon">🎙️</span>
+        <h3 class="step-title">Mozilla Common Voice</h3>
+        <p class="step-desc">
+          Millions of real human voice recordings used as the "safe call" baseline
+          to teach the model what normal human speech looks like.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h2>Ready to protect yourself?</h2>
+    <p>Start PhishShield's live detection — it takes under 10 seconds to begin monitoring your call.</p>
+    <a href="dashboard.html" class="btn-primary">
+      🛡️ Open Detection Dashboard
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>PhishShield v1.0 — Open Source · MIT License · Built to fight phone fraud</p>
+    <p style="margin-top: 8px;">
+      Report a scam: <strong>Cyber Crime Helpline 1930</strong> · 
+      <a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a>
+    </p>
+  </footer>
+
+</body>
+</html>

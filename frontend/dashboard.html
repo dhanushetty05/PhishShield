@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhishShield — Live Detection Dashboard</title>
+  <link rel="stylesheet" href="style.css?v=3.2" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body>
+
+  <!-- ── FULL-SCREEN FRAUD OVERLAY (CINEMATIC) ─────────────────────── -->
+  <div id="fraud-overlay" class="fraud-overlay hidden">
+    <div class="fraud-box">
+      <div class="fraud-icon">🚨</div>
+      <div class="fraud-title">FRAUD DETECTED</div>
+      <p class="fraud-subtitle">Do NOT share OTP, PIN, or sensitive data</p>
+      <button class="fraud-dismiss" onclick="dismissFraudOverlay()">I Understand</button>
+    </div>
+  </div>
+
+  <!-- ── ALERT BANNER (slides down from top on high risk) ─────────── -->
+  <div class="alert-banner" id="alert-banner" role="alert" aria-live="assertive">
+    <div class="alert-inner" id="alert-inner">
+      <div class="alert-content">
+        <span class="alert-icon" id="alert-icon">🚨</span>
+        <div class="alert-message">
+          <strong id="alert-title">CRITICAL FRAUD DETECTED</strong>
+          <span id="alert-subtitle">Hang up immediately. Do not share any information.</span>
+        </div>
+      </div>
+      <button class="alert-close" onclick="dismissAlert()">Dismiss</button>
+    </div>
+  </div>
+
+  <!-- ── MAIN LAYOUT ──────────────────────────────────────────────── -->
+  <div class="dashboard-layout">
+
+    <!-- ── TOPBAR ──────────────────────────────────────────────────── -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <span class="shield">🛡️</span>
+        PhishShield
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:400; margin-left:4px;">
+          Live Detection
+        </span>
+      </div>
+
+      <div id="status-pill" class="status-pill idle">
+        <span class="status-dot"></span>
+        <span id="status-text">IDLE</span>
+      </div>
+
+      <div class="topbar-right">
+        <div class="timer-display" id="timer-display">00:00</div>
+        <a href="index.html" class="btn-secondary" style="padding:8px 16px; font-size:0.85rem;">
+          ← Home
+        </a>
+      </div>
+    </header>
+
+    <!-- ── MAIN PANEL (left/center) ──────────────────────────────── -->
+    <main class="main-panel">
+
+      <!-- Mic Error Message -->
+      <div class="mic-error" id="mic-error">
+        <strong>🎙️ Microphone Access Required</strong><br />
+        PhishShield needs microphone permission to listen to calls.<br />
+        Click the microphone icon in your browser's address bar and allow access,
+        then refresh this page.
+      </div>
+
+      <!-- Waveform Visualizer -->
+      <div class="waveform-container">
+        <div class="waveform-header">
+          <span class="waveform-label">Live Audio</span>
+          <span class="waveform-status" id="waveform-status">Waiting for input...</span>
+        </div>
+        <!-- Canvas for real audio waveform -->
+        <canvas id="waveform-canvas" width="800" height="80"></canvas>
+        <!-- CSS fallback bars shown when idle -->
+        <div class="wave-bars" id="wave-bars">
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+          <div class="wave-bar idle"></div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button class="btn-start" id="btn-start" onclick="startListening()">
+          🎙️ Start Listening
+        </button>
+        <button class="btn-stop" id="btn-stop" onclick="stopListening()" disabled>
+          ⏹️ Stop Listening
+        </button>
+        <button class="btn-demo" id="btn-demo" onclick="runDemoScenario()">
+          🎬 Run Demo Scenario
+        </button>
+      </div>
+
+      <!-- Transcript -->
+      <div class="transcript-panel">
+        <div class="panel-header">
+          <span class="panel-title">Live Transcript</span>
+          <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);"
+                id="chunk-counter">0 chunks processed</span>
+        </div>
+        <div class="transcript-text" id="transcript-text">
+          <span class="transcript-placeholder">
+            Transcript will appear here as you speak...
+          </span>
+        </div>
+      </div>
+
+      <!-- AI Reasoning Panel (NEW) -->
+      <div class="ai-reasoning-panel">
+        <div class="panel-header">
+          <span class="panel-title">🧠 AI Detection Reasoning</span>
+        </div>
+        <div class="ai-reasoning-content" id="ai-reasoning">
+          <div class="reasoning-item">
+            <span class="reasoning-icon">⏳</span>
+            <span class="reasoning-text">Waiting for analysis...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signals / Flags -->
+      <div class="flags-panel">
+        <div class="panel-header">
+          <span class="panel-title">Detected Signals</span>
+        </div>
+        <div class="flags-grid" id="flags-grid">
+          <span class="flag-tag none">✓ No signals detected</span>
+        </div>
+      </div>
+
+      <!-- History Table -->
+      <div class="history-panel">
+        <div class="panel-header">
+          <span class="panel-title">Analysis History</span>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Last 5 results</span>
+        </div>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Time</th>
+              <th>Risk Score</th>
+              <th>Level</th>
+              <th>Category</th>
+              <th>Top Keyword</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            <tr>
+              <td colspan="6" style="text-align:center; color:var(--text-muted); padding:24px;">
+                No analysis results yet. Start listening to see history.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+    <!-- ── SIDEBAR (right panel) ──────────────────────────────────── -->
+    <aside class="sidebar">
+
+      <!-- Risk Gauge -->
+      <div class="gauge-container">
+        <div class="gauge-title">Fraud Risk Score</div>
+        <div class="gauge-wrapper safe" id="gauge-wrapper">
+          <!-- Animated glow blob -->
+          <div class="gauge-glow" id="gauge-glow"></div>
+
+          <!-- SVG Circular gauge -->
+          <svg class="gauge-svg" viewBox="0 0 200 200">
+            <!-- Background track circle -->
+            <circle class="gauge-track" cx="100" cy="100" r="90" />
+            <!-- Animated fill arc -->
+            <circle class="gauge-fill" id="gauge-fill" cx="100" cy="100" r="90" />
+          </svg>
+
+          <!-- Center score display -->
+          <div class="gauge-center">
+            <div class="gauge-score" id="gauge-score">0</div>
+            <div class="gauge-percent">%</div>
+            <div class="gauge-level" id="gauge-level">SAFE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score Breakdown -->
+      <div class="score-breakdown">
+        <div class="breakdown-row">
+          <span class="breakdown-label">🎵 Voice</span>
+          <div class="breakdown-bar-wrap">
+            <div class="breakdown-bar voice" id="voice-bar"></div>
+          </div>
+          <span class="breakdown-val" id="voice-val">0%</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-label">💬 Content</span>
+          <div class="breakdown-bar-wrap">
+            <div class="breakdown-bar content" id="content-bar"></div>
+          </div>
+          <span class="breakdown-val" id="content-val">0%</span>
+        </div>
+      </div>
+
+      <!-- Fraud Category -->
+      <div class="category-display">
+        <div class="category-tag" id="category-tag">Waiting...</div>
+      </div>
+
+      <!-- Recommendation -->
+      <div class="recommendation-box safe" id="recommendation-box">
+        <div class="recommendation-title">Recommendation</div>
+        <div class="recommendation-text" id="recommendation-text">
+          Click "Start Listening" and speak or hold your phone near your
+          computer's microphone to begin real-time fraud detection.
+        </div>
+      </div>
+
+      <!-- Connection status -->
+      <div style="text-align:center;">
+        <span style="font-size:0.75rem; color:var(--text-muted);" id="ws-status">
+          WebSocket: Not connected
+        </span>
+      </div>
+
+    </aside>
+  </div><!-- /.dashboard-layout -->
+
+  <script src="app.js?v=4.0"></script>
+</body>
+</html>
